@@ -8,7 +8,7 @@ based on a users search.
 5 day forecast for that city.
 - Searches are then saved under a history tab that allows the users to repeat a previous search without them having to type it again.
 
-## Installition
+## Installation
 - Available on: 
 
 ## Usage
@@ -19,5 +19,3 @@ based on a users search.
 ![alt text](/assets/images/screenshot1.PNG?raw=true)
 
 ![alt text](/assets/images/screenshot2.PNG?raw=true)
-
-![alt text](/assets/images/screenshot3.PNG?raw=true)
