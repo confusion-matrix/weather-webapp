@@ -9,7 +9,7 @@ based on a users search.
 - Searches are then saved under a history tab that allows the users to repeat a previous search without them having to type it again.
 
 ## Installation
-- Available on: 
+- Available on: https://confusion-matrix.github.io/weather-webapp/ 
 
 ## Usage
 - On the website in type a city name into the textbox. Click submit.
@@ -19,3 +19,4 @@ based on a users search.
 ![alt text](/assets/images/screenshot1.PNG?raw=true)
 
 ![alt text](/assets/images/screenshot2.PNG?raw=true)
+
