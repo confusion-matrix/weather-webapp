@@ -1,4 +1,3 @@
-var uv;
 async function apiCall(event) {
     var cityURL, forecastURL;
     if (event.data !== null) {
@@ -24,20 +23,26 @@ async function apiCall(event) {
             $("#text-box").val("");
             $("#city-stats").empty();
             $("#five-day").empty();
-            // add to history if it's not coming from the history button
+
             if (event.data === null)
                 addHistory(data[0].name);
-            
+
             // !!! --- CITY CONTAINER --- !!!
             $("<h2/>", {
                 id: "cityHeader"
             }).text(data[0].name + " ").appendTo("#city-stats");
-            $("<span.>").text(moment().format("MM/DD/YYYY")).appendTo("#cityHeader");
-            $("<p/>").text("Temp: " + data[0].main.temp + "F").appendTo("#city-stats");
+            $("<span/>").text(moment().format("MM/DD/YYYY")).appendTo("#cityHeader");
+            $("<span/>", {
+                id: "img1",
+                display: "inline-block"
+            }).appendTo("#cityHeader");
+            $("<img/>", {
+                src: "http://openweathermap.org/img/w/" + data[0].weather[0].icon + ".png"
+            }).appendTo("#img1");
+            $("<p/>").text("Temp: " + data[0].main.temp + "\xB0F").appendTo("#city-stats");
             $("<p/>").text("Wind: " + data[0].wind.speed + "mph").appendTo("#city-stats");
             $("<p/>").text("Humidity: " + data[0].main.humidity + "%").appendTo("#city-stats");
-            getUV(data[0].coord.lat, data[0].coord.lon)
-            $("<p/>").text("UV: " + uv).appendTo("#city-stats");
+            getUV(data[0].coord.lat, data[0].coord.lon);
             
             // !!! --- 5 DAY FORECAST CONTAINER --- !!!
             $("<h2/>", {
@@ -53,7 +58,10 @@ async function apiCall(event) {
                 }).appendTo("#forecast-container");
                 $("<h3/>").text(moment(data[1].list[j].dt_txt.split(" ")[0], "YYYY-MM-DD").format("MM/DD/YYYY")).appendTo("#day" + i);
                 // Dislay icon here;
-                $("<p/>").text("Temp: " + data[1].list[j].main.temp + "F").appendTo("#day" + i);
+                $("<img/>", {
+                    src: "http://openweathermap.org/img/wn/" + data[1].list[j].weather[0].icon + "@2x.png"
+                }).appendTo("#day" + i);
+                $("<p/>").text("Temp: " + data[1].list[j].main.temp + "\xB0F").appendTo("#day" + i);
                 $("<p/>").text("Wind: " + data[1].list[j].wind.speed + "mph").appendTo("#day" + i);
                 $("<p/>").text("Humidity: " + data[1].list[j].main.humidity + "%").appendTo("#day" + i);
                 
@@ -68,9 +76,8 @@ async function getUV(lat, lon) {
             return res.json();
         })
         .then(function(data) {
-            
-            uv = data.current.uvi
-            console.log("UV: " + uv)
+            console.log(data);
+            $("<p/>").text("UV: " + data.current.uvi).appendTo("#city-stats");
         })
 }
 
@@ -94,7 +101,8 @@ function createHistory() {
     }
 }
 
-function addHistory(city) { 
+function addHistory(city) {
+    console.log("add history")
     var data = JSON.parse(localStorage.getItem("weatherHistory"));
     // update local storage
     if (data !== null && !data.includes(city)) {
@@ -106,6 +114,7 @@ function addHistory(city) {
         }
         localStorage.setItem("weatherHistory", JSON.stringify(data));
     } else if (data !== null && data.includes(city)) {
+        console.log("Reshape");
         // move existing data to the top - ADD THIS ON CLICK
         data.splice(data.indexOf(city), 1);
         data.unshift(city);
@@ -115,6 +124,7 @@ function addHistory(city) {
         localStorage.setItem("weatherHistory", JSON.stringify([city]));
     // retrieve local storage data and update HTML
     data = JSON.parse(localStorage.getItem("weatherHistory"));
+    // reassign button on click function and name
     if (data !== null && data.length > 1) {
         for (var i = 0; i < (data.length - 1); i++) {
             $("#history-btn" + i).text(data[i]).click({param: data[i]}, apiCall);
@@ -125,9 +135,7 @@ function addHistory(city) {
     } else {
         $("#history-btn0").text(city).click({param: city}, apiCall);
         $("#history-box0").show();
-    }
-        
-    
+    } 
 }
 
 $(function() {
