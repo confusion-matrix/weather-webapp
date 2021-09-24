@@ -19,5 +19,3 @@ based on a users search.
 ![alt text](/assets/images/screenshot1.PNG?raw=true)
 
 ![alt text](/assets/images/screenshot2.PNG?raw=true)
-
-![alt text](/assets/images/screenshot3.PNG?raw=true)
