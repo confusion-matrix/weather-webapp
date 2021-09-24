@@ -8,8 +8,8 @@ based on a users search.
 5 day forecast for that city.
 - Searches are then saved under a history tab that allows the users to repeat a previous search without them having to type it again.
 
-## Installition
-- Available on: 
+## Installation
+- Available on: https://confusion-matrix.github.io/weather-webapp/ 
 
 ## Usage
 - On the website in type a city name into the textbox. Click submit.
