@@ -1,12 +1,12 @@
 async function apiCall(event) {
     var cityURL, forecastURL;
     if (event.data !== null) {
-        cityURL = "http://api.openweathermap.org/data/2.5/weather?q=" + event.data.param + "&units=imperial&appid=dc13b3e193f3a4a5ad7ecc00213ab023";
-        forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + event.data.param + "&units=imperial&appid=dc13b3e193f3a4a5ad7ecc00213ab023";
+        cityURL = "https://api.openweathermap.org/data/2.5/weather?q=" + event.data.param + "&units=imperial&appid=dc13b3e193f3a4a5ad7ecc00213ab023";
+        forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + event.data.param + "&units=imperial&appid=dc13b3e193f3a4a5ad7ecc00213ab023";
 
     } else {
-        cityURL = "http://api.openweathermap.org/data/2.5/weather?q=" + $("#text-box").val() + "&units=imperial&appid=dc13b3e193f3a4a5ad7ecc00213ab023";
-        forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + $("#text-box").val() + "&units=imperial&appid=dc13b3e193f3a4a5ad7ecc00213ab023";
+        cityURL = "https://api.openweathermap.org/data/2.5/weather?q=" + $("#text-box").val() + "&units=imperial&appid=dc13b3e193f3a4a5ad7ecc00213ab023";
+        forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + $("#text-box").val() + "&units=imperial&appid=dc13b3e193f3a4a5ad7ecc00213ab023";
     }
     // Day Data
     Promise.all([
@@ -37,7 +37,7 @@ async function apiCall(event) {
                 display: "inline-block"
             }).appendTo("#cityHeader");
             $("<img/>", {
-                src: "http://openweathermap.org/img/w/" + data[0].weather[0].icon + ".png"
+                src: "https://openweathermap.org/img/w/" + data[0].weather[0].icon + ".png"
             }).appendTo("#img1");
             $("<p/>").text("Temp: " + data[0].main.temp + "\xB0F").appendTo("#city-stats");
             $("<p/>").text("Wind: " + data[0].wind.speed + "mph").appendTo("#city-stats");
@@ -59,7 +59,7 @@ async function apiCall(event) {
                 $("<h3/>").text(moment(data[1].list[j].dt_txt.split(" ")[0], "YYYY-MM-DD").format("MM/DD/YYYY")).appendTo("#day" + i);
                 // Dislay icon here;
                 $("<img/>", {
-                    src: "http://openweathermap.org/img/wn/" + data[1].list[j].weather[0].icon + "@2x.png"
+                    src: "https://openweathermap.org/img/wn/" + data[1].list[j].weather[0].icon + "@2x.png"
                 }).appendTo("#day" + i);
                 $("<p/>").text("Temp: " + data[1].list[j].main.temp + "\xB0F").appendTo("#day" + i);
                 $("<p/>").text("Wind: " + data[1].list[j].wind.speed + "mph").appendTo("#day" + i);
